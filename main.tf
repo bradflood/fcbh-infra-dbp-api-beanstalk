@@ -57,7 +57,7 @@ module "elastic_beanstalk_environment" {
   stage     = module.fcbh_dbp_api_dev_label.stage
   name      = module.fcbh_dbp_api_dev_label.name
   zone_id   = var.zone_id
-  app       = odule.elastic_beanstalk_application.app_name
+  app       = module.elastic_beanstalk_application.app_name
 
   instance_type           = var.instance_type
 

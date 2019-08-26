@@ -1,7 +1,23 @@
 provider "aws" {
-  region = "us-east-1"
+  profile = "default"
+  region  = var.region
 }
 
+module "fcbh_dbp_api_dev_label" {
+  source     = "git::https://github.com/cloudposse/terraform-terraform-label.git?tags/0.4.0"
+  namespace  = "fcbh"
+  stage      = "dev"
+  name       = "beanstalk"
+  attributes = ["public"]
+  delimiter  = "-"
+
+  tags = {
+    "BusinessUnit" = "FCBH",
+    "Snapshot"     = "true"
+  }
+}
+
+/* 
 variable "max_availability_zones" {
   default = "2"
 }
@@ -65,11 +81,12 @@ module "elastic_beanstalk_environment" {
   keypair             = ""
 
   env_vars = "${
-      map(
-        "ENV1", "Test1",
-        "ENV2", "Test2",
-        "ENV3", "Test3"
-      )
-    }"
+    map(
+      "ENV1", "Test1",
+      "ENV2", "Test2",
+      "ENV3", "Test3"
+    )
+  }"
 }
 
+ */
